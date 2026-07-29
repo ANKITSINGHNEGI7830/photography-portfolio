@@ -1,0 +1,19 @@
+{
+  "name": "mara-voss-photography",
+  "version": "1.0.0",
+  "description": "Static photography portfolio site — deploys to an S3 static website bucket.",
+  "private": true,
+  "scripts": {
+    "dev": "live-server --port=8080 --open=/index.html",
+    "lint:html": "html-validate index.html",
+    "deploy": "aws s3 sync . s3://$BUCKET_NAME --delete --exclude \".git/*\" --exclude \".github/*\" --exclude \"node_modules/*\" --exclude \"package*.json\" --exclude \"README.md\" --exclude \".gitignore\"",
+    "invalidate": "aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths \"/*\""
+  },
+  "devDependencies": {
+    "html-validate": "^8.18.1",
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
